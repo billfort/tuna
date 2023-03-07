@@ -58,6 +58,14 @@ func NewEncryptUDPConn(conn *net.UDPConn) *EncryptUDPConn {
 	return ec
 }
 
+func (ec *EncryptUDPConn) Replace(newConn *EncryptUDPConn) {
+	ec.lock.Lock()
+	defer ec.lock.Unlock()
+	ec.conn = newConn.conn
+	ec.encoders = newConn.encoders
+	ec.decoders = newConn.decoders
+}
+
 func (ec *EncryptUDPConn) AddCodec(addr *net.UDPAddr, encryptKey *[32]byte, encryptionAlgo pb.EncryptionAlgo, initiator bool) error {
 	var cipher stream.Cipher
 	var err error

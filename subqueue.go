@@ -47,7 +47,7 @@ func init() {
 					continue
 				}
 
-				log.Println("Subscribed to topic", subData.topic, "success:", txnHash)
+				log.Println("Subscribed to topic ", subData.topic, " success:", txnHash)
 				break
 			}
 			time.Sleep(time.Second)

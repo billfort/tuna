@@ -715,7 +715,7 @@ func (c *Common) UpdateServerConn(remotePublicKey []byte) error {
 			return err
 		}
 		c.SetServerUDPConn(uConn)
-		log.Println("Connected to UDP at", addr.String())
+		log.Println(uConn.LocalAddr(), "Connected to UDP at", addr.String())
 	}
 
 	c.SetConnected(true)
@@ -759,6 +759,8 @@ func (c *Common) CreateServerConn(force bool) error {
 						log.Println(err)
 					}
 				}
+				// FXB
+				metadata.Ip = "127.0.0.1"
 
 				c.SetMetadata(metadata)
 
@@ -910,7 +912,7 @@ func (c *Common) nknFilterContext(ctx context.Context) ([]string, map[string]str
 			return nil, nil, err
 		}
 		if subscribers.Subscribers.Len() == 0 {
-			return nil, nil, errors.New("there is no service providers for " + c.Service.Name)
+			return nil, nil, errors.New("there is no service providers for topic " + topic + ", service " + c.Service.Name)
 		}
 
 		var allPrefix [][]byte

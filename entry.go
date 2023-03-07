@@ -576,10 +576,12 @@ func StartReverse(config *EntryConfiguration, wallet *nkn.Wallet) error {
 		serviceListenIP = config.ReverseServiceListenIP
 	}
 
-	ip, err := ipify.GetIp()
-	if err != nil {
-		return fmt.Errorf("couldn't get IP: %v", err)
-	}
+	// FXB udp test
+	// ip, err := ipify.GetIp()
+	// if err != nil {
+	// 	return fmt.Errorf("couldn't get IP: %v", err)
+	// }
+	ip := "127.0.0.1"
 
 	listener, err := net.ListenTCP(tcp4, &net.TCPAddr{Port: int(config.ReverseTCP)})
 	if err != nil {
