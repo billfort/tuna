@@ -488,6 +488,7 @@ func (c *Common) startUDPReaderWriter(conn UDPConn, toAddr *net.UDPAddr, in *uin
 					log.Println("Couldn't send data to server:", err)
 					continue
 				}
+
 				if out != nil {
 					atomic.AddUint64(out, uint64(n))
 				} else {

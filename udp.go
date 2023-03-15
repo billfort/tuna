@@ -122,6 +122,7 @@ func (ec *EncryptUDPConn) ReadFromUDP(b []byte) (n int, addr *net.UDPAddr, err e
 	if err != nil {
 		return 0, nil, err
 	}
+
 	return len(plain), addr, nil
 }
 
@@ -167,6 +168,7 @@ func (ec *EncryptUDPConn) WriteMsgUDP(b, oob []byte, addr *net.UDPAddr) (n, oobn
 	if err != nil {
 		return 0, 0, err
 	}
+
 	return len(b), oobn, err
 }
 

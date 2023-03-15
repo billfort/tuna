@@ -3,7 +3,6 @@ package tuna
 import (
 	"errors"
 	"fmt"
-	"github.com/rdegges/go-ipify"
 	"log"
 	"net"
 	"strconv"
@@ -11,6 +10,8 @@ import (
 	"sync"
 	"sync/atomic"
 	"time"
+
+	"github.com/rdegges/go-ipify"
 
 	"github.com/nknorg/nkn-sdk-go"
 	"github.com/nknorg/nkn/v2/common"
@@ -419,6 +420,7 @@ func (te *TunaExit) readUDP() {
 				continue
 			}
 			data := <-serverReadChan
+
 			if len(data) < PrefixLen {
 				log.Println("empty udp packet received")
 				te.Close()
@@ -430,6 +432,7 @@ func (te *TunaExit) readUDP() {
 				log.Println("get service conn error:", err)
 				continue
 			}
+
 			_, _, err = serviceConn.WriteMsgUDP(data[PrefixLen:], nil, nil)
 			if err != nil {
 				log.Println("Couldn't send data to service:", err)

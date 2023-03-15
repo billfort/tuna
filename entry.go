@@ -17,7 +17,8 @@ import (
 	"github.com/nknorg/tuna/pb"
 	"github.com/nknorg/tuna/util"
 	"github.com/patrickmn/go-cache"
-	"github.com/rdegges/go-ipify"
+
+	// "github.com/rdegges/go-ipify"
 	"github.com/xtaci/smux"
 )
 
@@ -820,6 +821,7 @@ func StartReverse(config *EntryConfiguration, wallet *nkn.Wallet) error {
 										log.Println("couldn't send udp data to server:", err)
 										continue
 									}
+
 									addrToKeyLock.RLock()
 									key, ok := addrToKey[udpAddr.String()]
 									addrToKeyLock.RUnlock()
